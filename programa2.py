@@ -1,0 +1,1 @@
+print("Olá mundo do bloco de notas")
