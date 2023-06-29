@@ -9,12 +9,14 @@
 lista = [13, -3, 5, 9, 19, 46, 79, 37, -18, 3, 13, 7, 4, 4, -42]
 
 #inicializando as nossas variáveis
+
 maiorValor = lista[0]
 menorValor = lista[0]
 listaPares = []
 ocorrenciaItem1 = 0
 mediaValores = 0
 somaNegativos = 0
+
 
 #inciando nosso loop
 for index in range(0,len(lista)):
