@@ -1,33 +1,47 @@
-print("Bem vindo ao jogo da forca")
+def jogar():
+    import random
 
-palavra_secreta = 'botafogo'
-letras_acertadas = ['_', '_', '_', '_', '_', '_', '_', '_']
+    print("Bem vindo ao jogo da forca")
 
-acertou = False
-enforcou = False
-erros = 0
+    arquivo = open('palavras.txt', 'r')
+    palavras = []
 
-while(not acertou and not enforcou):
-    chute = input('Qual letra?\n')
-    if(chute in palavra_secreta):
-        posicao = 0
+    for linha in arquivo:
+        linha = linha.strip()
+        palavras.append(linha)
 
-        for letra in palavra_secreta:
-            if(chute.upper() == letra.upper()):
-                letras_acertadas[posicao] = letra
-            posicao += 1
+    arquivo.close()
 
+    numero = random.randrange(0, len(palavras))
+    palavra_secreta = palavras[numero].upper()
+
+    letras_acertadas = ['_' for letra in palavra_secreta]
+
+    acertou = False
+    enforcou = False
+    erros = 0
+
+    while(not acertou and not enforcou):
+        chute = input('Qual letra?\n').upper()
+        if(chute in palavra_secreta):
+            posicao = 0
+
+            for letra in palavra_secreta:
+                if(chute == letra):
+                    letras_acertadas[posicao] = letra
+                posicao += 1
+
+        else:
+            erros += 1
+        print(letras_acertadas)
+
+        enforcou = erros == 6
+        acertou = '_' not in letras_acertadas
+
+    if(acertou):
+        print('Voce ganhou')
     else:
-        erros += 1
-    print(letras_acertadas)
-
-    enforcou = erros == 6
-    acertou = '_' not in letras_acertadas
-
-if(acertou):
-    print('Voce ganhou')
-else:
-    print('Voce foi enforcado')
+        print('Voce foi enforcado')
 
 
 
