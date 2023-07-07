@@ -12,6 +12,9 @@ class Conta:
 
         Conta._total_de_contas += 1
 
+    def atualiza(self, taxa):
+        self._saldo += self._saldo * taxa
+
     @property
     def historico(self):
         return self._historico
@@ -35,10 +38,10 @@ class Conta:
         else:
             self._saldo = saldo
 
-
     @property
     def limite(self):
         return self._limite
+
     @staticmethod
     def get_total_de_contas():
         return Conta._total_de_contas
