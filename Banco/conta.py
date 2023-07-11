@@ -1,19 +1,25 @@
 from cliente import Cliente
 from historico import Historico
-class Conta:
+import abc
+class Conta(abc.ABC):
     _total_de_contas = 1
-    def __init__(self, numero, cliente, saldo, limite):
+    def __init__(self, numero, cliente, saldo, limite = 10000.0):
         print('Inicializando a conta')
         self._numero = numero
-        self._titular = cliente.nome
+        self._titular = cliente.nome+' '+cliente.sobrenome
         self._saldo = saldo
         self._limite = limite
         self._historico = Historico()
 
         Conta._total_de_contas += 1
 
+    def __str__(self):
+        return "Dados da Conta: \nNumero: {}\nTitular: {} \nSaldo: {}".format(self._numero, self._titular, self._saldo)
+
+    @abc.abstractmethod
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa
+        return self._saldo
 
     @property
     def historico(self):
